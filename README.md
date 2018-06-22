@@ -139,17 +139,19 @@ $ curl -u lumieres@unil.ch:test -X POST -d @data.xml http://localhost:3333/v1/re
 
 By default, rich text property are edited in Salsah with CKEditor configured to manage the default Knora HTML standoff mapping.
 
-1.  Add **Source** button to CKEditor toolbar by patching the file `salsah1/src/public/js/jquery.htmleditor.js:194`:
+1.  Add **Source** button to CKEditor toolbar by patching the file [jquery.htmleditor.js](https://github.com/dhlab-basel/Knora/blob/51b19ac26f7e30f7e47b6e66ed00206bd2932df0/salsah1/src/public/js/jquery.htmleditor.js#L194):
 
 ```javascript
         { name: 'tools', items: [ 'Maximize', 'Source' ] }
 ```
 
-2.  Allow CKEditor to accept `<span>` tag and its attributes by patching the file `salsah1/src/public/js/jquery.htmleditor.js:145`:
+2.  Allow CKEditor to accept `<span>` tag and its attributes by patching the file [jquery.htmleditor.js](https://github.com/dhlab-basel/Knora/blob/51b19ac26f7e30f7e47b6e66ed00206bd2932df0/salsah1/src/public/js/jquery.htmleditor.js#L145):
 
 ```javascript
 var filter =
   ' p em strong strike u sub sup hr h1 h2 h3 h4 h5 h6 pre table tbody tr td ol ul li cite blockquote code; a[!href](salsah-link); span(sic)[data-corr,title] ';
 ```
+
+**TODO:** this configuration should be created on the fly by getting the mapping associated to the value (Knora provides the possibility to have one mapping per value!)
 
 3.  **FIXME:** on save, Salsah/CKEditor should write text values with the mapping_id of the value and not with the default provided by Knora (probably hardcoded)
