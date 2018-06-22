@@ -152,6 +152,6 @@ var filter =
   ' p em strong strike u sub sup hr h1 h2 h3 h4 h5 h6 pre table tbody tr td ol ul li cite blockquote code; a[!href](salsah-link); span(sic)[data-corr,title] ';
 ```
 
-**TODO:** this configuration should be created on the fly by getting the mapping associated to the value (Knora provides the possibility to have one mapping per value!)
+**FIXME:** ([Salsah issue](https://github.com/dhlab-basel/Knora/issues/908)) this configuration should be created on the fly by getting the mapping associated to the value (Knora provides the possibility to have one mapping per value!)
 
-3.  **FIXME:** on save, Salsah/CKEditor should write text values with the mapping_id of the value and not with the default provided by Knora (probably hardcoded)
+3.  **FIXME:** ([Salsah issue](https://github.com/dhlab-basel/Knora/issues/907)) on save, Salsah/CKEditor should write text values with the mapping_id of the value and not with the default provided by Knora (probably hardcoded)
