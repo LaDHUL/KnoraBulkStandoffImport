@@ -139,13 +139,13 @@ $ curl -u lumieres@unil.ch:test -X POST -d @data.xml http://localhost:3333/v1/re
 
 By default, rich text property are edited in Salsah with CKEditor configured to manage the default Knora HTML standoff mapping.
 
-1.  Add **Source** button to CKEditor toolbar by patching the file [jquery.htmleditor.js](https://github.com/dhlab-basel/Knora/blob/51b19ac26f7e30f7e47b6e66ed00206bd2932df0/salsah1/src/public/js/jquery.htmleditor.js#L194):
+1.  Add **Source** button to CKEditor toolbar by patching the file [jquery.htmleditor.js:194](https://github.com/dhlab-basel/Knora/blob/51b19ac26f7e30f7e47b6e66ed00206bd2932df0/salsah1/src/public/js/jquery.htmleditor.js#L194):
 
 ```javascript
         { name: 'tools', items: [ 'Maximize', 'Source' ] }
 ```
 
-2.  Allow CKEditor to accept `<span>` tag and its attributes by patching the file [jquery.htmleditor.js](https://github.com/dhlab-basel/Knora/blob/51b19ac26f7e30f7e47b6e66ed00206bd2932df0/salsah1/src/public/js/jquery.htmleditor.js#L145):
+2.  Allow CKEditor to accept `<span>` tag and its attributes by patching the file [jquery.htmleditor.js:145](https://github.com/dhlab-basel/Knora/blob/51b19ac26f7e30f7e47b6e66ed00206bd2932df0/salsah1/src/public/js/jquery.htmleditor.js#L145):
 
 ```javascript
 var filter =
