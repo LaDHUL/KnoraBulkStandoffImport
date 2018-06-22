@@ -1,6 +1,6 @@
 # How to create a standoff mapping and use bulk import
 
-(Usinf Lumieres Lausanne ontology as example)
+(Using Lumieres Lausanne ontology as example)
 
 ## Create standoff mapping
 
