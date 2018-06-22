@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<knoraXmlImport:resources xmlns="http://api.knora.org/ontology/0113/lumieres-lausanne/xml-import/v1#" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://api.knora.org/ontology/0113/lumieres-lausanne/xml-import/v1# p0113-lumieres-lausanne.xsd" 
+    xmlns:p0113-lumieres-lausanne="http://api.knora.org/ontology/0113/lumieres-lausanne/xml-import/v1#" 
+    xmlns:knoraXmlImport="http://api.knora.org/ontology/knoraXmlImport/v1#">
+
+    <p0113-lumieres-lausanne:Person id="person_import">
+        <knoraXmlImport:label>person_import</knoraXmlImport:label>
+        <p0113-lumieres-lausanne:hasBiography knoraType="richtext_value" mapping_id="http://rdfh.ch/projects/0113/mappings/LLStandoffMapping">
+            <text xmlns="">
+                <p>
+                    <span class="sic" data-corr="voici l'adaptation" title="voici l'adaptation">Adaptation éditoriale</span>
+                </p>
+            </text>
+        </p0113-lumieres-lausanne:hasBiography>
+        <p0113-lumieres-lausanne:hasName knoraType="richtext_value">hasName</p0113-lumieres-lausanne:hasName>
+        <p0113-lumieres-lausanne:hasOldId knoraType="richtext_value">hasOldId</p0113-lumieres-lausanne:hasOldId>
+        <p0113-lumieres-lausanne:mayHaveBiography knoraType="boolean_value">true</p0113-lumieres-lausanne:mayHaveBiography>
+    </p0113-lumieres-lausanne:Person>
+
+</knoraXmlImport:resources>
