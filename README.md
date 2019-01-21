@@ -74,6 +74,8 @@ lumieres-lausanne:StandoffEditionTag rdf:type owl:Class ;
 
 Using an existing Knora server having the LL ontology installed:
 
+**TO UPDATE see v2 endpoint: https://docs.knora.org/paradox/03-apis/api-v2/xml-to-standoff-mapping.html**
+
 1.  Load `lumieres-lausanne-standoff.ttl` in graphdb (into `http://www.knora.org/ontology/0113/lumieres-lausanne`)
 
 2.  Load the mapping:
