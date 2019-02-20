@@ -143,6 +143,32 @@ $ curl -u admin_test@unil.ch:test -X POST -F json=@mappingForLL.json -F xml=@map
 
 3. Create a `ttl` representation to load at project ontology intialization:
 
+https://github.com/dhlab-basel/Knora/issues/1212
+
+```sparql
+PREFIX knora-base: <http://www.knora.org/ontology/knora-base#>
+
+Construct {
+    ?mapping ?p ?o .
+
+    ?mapping knora-base:hasMappingElement ?mEle .
+    ?mEle ?pp ?oo .
+    ?oo ?ppp ?ooo .
+}
+FROM <http://www.knora.org/data/0113/lumieres-lausanne>
+Where {
+    BIND(<http://rdfh.ch/projects/0113/mappings/LLStandoffMapping> as ?mapping)
+    ?mapping ?p ?o .
+
+    OPTIONAL {
+        ?mapping knora-base:hasMappingElement ?mEle .
+        ?mEle ?pp ?oo .
+
+        ?oo ?ppp ?ooo .
+    }
+}
+```
+
 ## Prepare bulk import
 
 1.  Get ontology schema:
