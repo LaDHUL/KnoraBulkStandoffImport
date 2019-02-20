@@ -209,6 +209,7 @@ Archive:  LL-schema.zip
         <mayHaveBiography knoraType="boolean_value">false</mayHaveBiography>
         <noticeIsCreated knoraType="boolean_value">false</noticeIsCreated>
         <noticeIsValid knoraType="boolean_value">false</noticeIsValid>
+    </Person>
 </knoraXmlImport:resources>
 ```
 
