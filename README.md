@@ -3,9 +3,7 @@
 Using Lumieres Lausanne ontology as example to manage xml encoding:
 
 ```html
-<span class="sic" data-corr="voici l'adaptation" title="voici l'adaptation"
-  >Adaptation éditoriale</span
->
+<span class="sic" data-corr="voici l'adaptation" title="voici l'adaptation">Adaptation éditoriale</span>
 ```
 
 Knora docs:
