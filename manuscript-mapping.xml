@@ -367,4 +367,29 @@
         </standoffClass>
     </mappingElement>
 
+    <mappingElement>
+        <tag>
+            <name>span</name>
+            <class>sic</class>
+            <namespace>noNamespace</namespace>
+            <separatesWords>true</separatesWords>
+        </tag>
+        <standoffClass>
+            <classIri>http://www.knora.org/ontology/0113/lumieres-lausanne#StandoffEditionTag</classIri>
+            <attributes>
+                <attribute>
+                    <attributeName>data-corr</attributeName>
+                    <namespace>noNamespace</namespace>
+                    <propertyIri>http://www.knora.org/ontology/0113/lumieres-lausanne#standoffEditionTagHasFix</propertyIri>
+                </attribute>
+                <attribute>
+                    <attributeName>title</attributeName>
+                    <namespace>noNamespace</namespace>
+                    <propertyIri>http://www.knora.org/ontology/0113/lumieres-lausanne#standoffEditionTagHasTitle</propertyIri>
+                </attribute>
+            </attributes>
+        </standoffClass>
+    </mappingElement>
+
+
 </mapping>

@@ -8,16 +8,9 @@
 @prefix lumieres-lausanne: <http://www.knora.org/ontology/0113/lumieres-lausanne#> .
 @base <http://www.knora.org/ontology/0113/lumieres-lausanne> .
 
-
-
-lumieres-lausanne:standoffEditionTagHasFix rdf:type owl:DatatypeProperty ;
-                  knora-base:subjectClassConstraint lumieres-lausanne:StandoffEditionTag ;
-                  knora-base:objectDatatypeConstraint xsd:string .
-
-lumieres-lausanne:standoffEditionTagHasTitle rdf:type owl:DatatypeProperty ;
-                  knora-base:subjectClassConstraint lumieres-lausanne:StandoffEditionTag ;
-                  knora-base:objectDatatypeConstraint xsd:string .
-
+##########################################################
+# <span class="" data-corr="" title=""></span
+##########################################################
 lumieres-lausanne:StandoffEditionTag rdf:type owl:Class ;
     rdfs:subClassOf knora-base:StandoffTag,
                    [
@@ -31,4 +24,13 @@ lumieres-lausanne:StandoffEditionTag rdf:type owl:Class ;
                       owl:cardinality "1"^^xsd:nonNegativeInteger
                    ] ;
     rdfs:label "Represents an edition fix in a TextValue"@en.                 
+
+
+lumieres-lausanne:standoffEditionTagHasFix rdf:type owl:DatatypeProperty ;
+                  knora-base:subjectClassConstraint lumieres-lausanne:StandoffEditionTag ;
+                  knora-base:objectDatatypeConstraint xsd:string .
+
+lumieres-lausanne:standoffEditionTagHasTitle rdf:type owl:DatatypeProperty ;
+                  knora-base:subjectClassConstraint lumieres-lausanne:StandoffEditionTag ;
+                  knora-base:objectDatatypeConstraint xsd:string .
 

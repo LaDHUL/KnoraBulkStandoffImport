@@ -4,18 +4,79 @@
     xmlns:p0113-lumieres-lausanne="http://api.knora.org/ontology/0113/lumieres-lausanne/xml-import/v1#" 
     xmlns:knoraXmlImport="http://api.knora.org/ontology/knoraXmlImport/v1#">
 
-    <p0113-lumieres-lausanne:Person id="person_import">
-        <knoraXmlImport:label>person_import</knoraXmlImport:label>
-        <p0113-lumieres-lausanne:hasBiography knoraType="richtext_value" mapping_id="http://rdfh.ch/projects/0113/mappings/LLStandoffMapping">
+    <User id="id_gfaucherand">
+        <knoraXmlImport:label>gfaucherand</knoraXmlImport:label>
+        <isKnoraUser knoraType="uri_value">http://rdfh.ch/users/lumieres-lausanne-gfaucherand</isKnoraUser>
+        <userHasName knoraType="richtext_value">Gilles Faucherand</userHasName>
+    </User>
+
+    <Person id="id_Mirabeau_Victor_de_Riqueti_marquis_de_1715_1789_">
+        <knoraXmlImport:label>Mirabeau, Victor de Riqueti, marquis de (1715 - 1789)</knoraXmlImport:label>
+        <hasCivilStatus knoraType="richtext_value">Fils Jean Antoine Riqueti de Mirabeau (1666-1737) et de Françoise née de Castellane (1695-1769). M. épouse en 1743 Marie Geneviève née de Vassan. M. a onze enfants, dont Honoré Gabriel.</hasCivilStatus>
+        <hasName knoraType="richtext_value">Mirabeau, Victor de Riqueti, marquis de</hasName>
+        <hasNationality knoraType="hlist_value">http://rdfh.ch/lists/0113/00d89c99ca01</hasNationality>
+        <hasOldId knoraType="richtext_value">269</hasOldId>
+        <hasPlaceBirth knoraType="richtext_value">Pertuis</hasPlaceBirth>
+        <hasPlaceDeath knoraType="richtext_value">Argenteuil</hasPlaceDeath>
+        <hasReligion knoraType="hlist_value">http://rdfh.ch/lists/0113/b921967c9e01</hasReligion>
+        <isApproximateBeginDate knoraType="boolean_value">false</isApproximateBeginDate>
+        <isApproximateEndDate knoraType="boolean_value">false</isApproximateEndDate>
+        <isModern knoraType="boolean_value">false</isModern>
+        <mayHaveBiography knoraType="boolean_value">true</mayHaveBiography>
+        <noticeIsCreated knoraType="boolean_value">true</noticeIsCreated>
+        <noticeIsValid knoraType="boolean_value">true</noticeIsValid>
+        <personHasDate knoraType="date_value">GREGORIAN:1715-10-5 CE:1789-7-13 CE</personHasDate>
+    </Person>
+
+    <Contribution id="id_mirabeau_auteur">
+        <knoraXmlImport:label>mirabeau-auteur</knoraXmlImport:label>
+        <contributionHasSequenceNumber knoraType="int_value">1</contributionHasSequenceNumber>
+        <hasContributionType knoraType="hlist_value">http://rdfh.ch/lists/0113/154349a29401</hasContributionType>
+        <isContributor>
+            <Person knoraType="link_value" target="id_Mirabeau_Victor_de_Riqueti_marquis_de_1715_1789_" linkType="ref"></Person>
+        </isContributor>
+    </Contribution>
+
+    <BibliographicNotice id="id_biblio1">
+        <knoraXmlImport:label>biblio1</knoraXmlImport:label>
+        <bibliographicNoticeHasTitle knoraType="richtext_value">Sans titre [Lettre à Marc Charles Frédéric de Sacconay, 28 octobre 1731]</bibliographicNoticeHasTitle>
+        <hasContribution>
+            <Contribution knoraType="link_value" target="id_mirabeau_auteur" linkType="ref"></Contribution>
+        </hasContribution>
+        <hasDocumentType knoraType="hlist_value">http://rdfh.ch/lists/0113/2240f647af01</hasDocumentType>
+        <hasLanguage knoraType="hlist_value">http://rdfh.ch/lists/0113/384d693b9a01</hasLanguage>
+        <hasLiteratureType knoraType="hlist_value">http://rdfh.ch/lists/0113/eddfe26c9601</hasLiteratureType>
+        <hasManuscriptType knoraType="hlist_value">http://rdfh.ch/lists/0113/2a4929fe9701</hasManuscriptType>
+        <hasOldId knoraType="richtext_value">4478</hasOldId>
+        <hasPages knoraType="richtext_value">1</hasPages>
+        <hasShortTitle knoraType="richtext_value">Lettre à Marc Charles Frédéric de Sacconay</hasShortTitle>
+        <hasSubjectKeyword knoraType="hlist_value">http://rdfh.ch/lists/0113/25f56e083701</hasSubjectKeyword>
+        <hasTranscription>
+            <Transcription knoraType="link_value" target="id_Sans_titre_Lettre_Marc_Charles_Fr_d_ric_de_Sacconay_28_octobre_1731_" linkType="ref"></Transcription>
+        </hasTranscription>
+        <hasWritingDate knoraType="date_value">GREGORIAN:1731-10-28 CE</hasWritingDate>
+        <hasWritingPlace knoraType="richtext_value">Besançon</hasWritingPlace>
+    </BibliographicNotice>
+
+    <Transcription id="id_Sans_titre_Lettre_Marc_Charles_Fr_d_ric_de_Sacconay_28_octobre_1731_">
+        <knoraXmlImport:label>Sans titre [Lettre à Marc Charles Frédéric de Sacconay, 28 octobre 1731]</knoraXmlImport:label>
+        <hasDiffusionType knoraType="boolean_value">true</hasDiffusionType>
+        <hasOldId knoraType="richtext_value">169</hasOldId>
+        <hasReleaseDate knoraType="date_value">GREGORIAN:2016-12-25 CE</hasReleaseDate>
+        <hasReviewer>
+            <User knoraType="link_value" target="id_gfaucherand" linkType="ref"></User>
+        </hasReviewer>
+        <hasScope knoraType="hlist_value">http://rdfh.ch/lists/0113/f3daeff3af01</hasScope>
+        <hasStatus knoraType="hlist_value">http://rdfh.ch/lists/0113/58a79cbaaf01</hasStatus>
+        <transcriptionHasCreator>
+            <User knoraType="link_value" target="id_gfaucherand" linkType="ref"></User>
+        </transcriptionHasCreator>
+        <transcriptionHasText knoraType="richtext_value" mapping_id="http://rdfh.ch/projects/0113/mappings/manuscript-mapping">
             <text xmlns="">
                 <p>
                     <span class="sic" data-corr="voici l'adaptation" title="voici l'adaptation">Adaptation éditoriale</span>
                 </p>
             </text>
-        </p0113-lumieres-lausanne:hasBiography>
-        <p0113-lumieres-lausanne:hasName knoraType="richtext_value">hasName</p0113-lumieres-lausanne:hasName>
-        <p0113-lumieres-lausanne:hasOldId knoraType="richtext_value">hasOldId</p0113-lumieres-lausanne:hasOldId>
-        <p0113-lumieres-lausanne:mayHaveBiography knoraType="boolean_value">true</p0113-lumieres-lausanne:mayHaveBiography>
-    </p0113-lumieres-lausanne:Person>
-
+        </transcriptionHasText>
+    </Transcription>
 </knoraXmlImport:resources>
