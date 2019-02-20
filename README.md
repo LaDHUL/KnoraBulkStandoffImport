@@ -1,4 +1,4 @@
-# How to create a standoff mapping and use bulk import
+# How to create a standoff mapping and test with bulk import
 
 Using Lumieres Lausanne ontology as example to manage xml encoding:
 
@@ -56,11 +56,11 @@ lumieres-lausanne:standoffEditionTagHasTitle rdf:type owl:DatatypeProperty ;
 
 ```
 
-2. Copy default Knora HTML standoff mapping (`webapi/_test_data/test_route/texts/mappingForStandardHTML.xml`) into file `mappingForLL.xml`
+2. Copy default Knora HTML standoff mapping (`webapi/_test_data/test_route/texts/mappingForStandardHTML.xml`) into file `manuscript-mapping.xml`
 
 (copy schema for validation: `webapi/src/main/resources/mappingXMLToStandoff.xsd`)
 
-3. Add at the end of this file the mapping for `<span>` with its attributes:
+3. Add at the end of `manuscript-mapping.xml` the mapping for `<span>` with its attributes:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -96,15 +96,15 @@ lumieres-lausanne:standoffEditionTagHasTitle rdf:type owl:DatatypeProperty ;
 </mapping>
 ```
 
-4.  Create description file of this mapping `mappingForLL.json`:
+4.  Create description file of this mapping `manuscript-mapping.json`:
 
 ```json
 {
-  "knora-api:mappingHasName": "LLStandoffMapping",
+  "knora-api:mappingHasName": "manuscript-mapping",
   "knora-api:attachedToProject": {
     "@id": "http://rdfh.ch/projects/0113"
   },
-  "rdfs:label": "LLStandoffMapping",
+  "rdfs:label": "Manuscript Standoff Mapping",
   "@context": {
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "knora-api": "http://api.knora.org/ontology/knora-api/v2#"
@@ -118,20 +118,26 @@ Using an existing Knora server having the LL ontology installed:
 
 1.  Load `lumieres-lausanne-standoff.ttl` in graphdb (into `http://www.knora.org/ontology/0113/lumieres-lausanne`)
 
+```shell
+$ ./load-standoff-onto.expect http://localhost:7200
+```
+
+(Restart Knora)
+
 2.  Load the mapping:
 
 ```shell
-$ curl -u admin_test@unil.ch:test -X POST -F json=@mappingForLL.json -F xml=@mappingForLL.xml  http://localhost:3333/v2/mapping
+$ curl -u admin_test@unil.ch:test -X POST -F json=@manuscript-mapping.json -F xml=@manuscript-mapping.xml  http://localhost:3333/v2/mapping
 ```
 
 ```json
 {
-  "@id": "http://rdfh.ch/projects/0113/mappings/LLStandoffMapping",
+  "@id": "http://rdfh.ch/projects/0113/mappings/manuscript-mapping",
   "@type": "http://api.knora.org/ontology/knora-api/v2#XMLToStandoffMapping",
   "http://api.knora.org/ontology/knora-api/v2#attachedToProject": {
     "@id": "http://rdfh.ch/projects/0113"
   },
-  "rdfs:label": "LLStandoffMapping",
+  "rdfs:label": "Manuscript Standoff Mapping",
   "@context": {
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -141,30 +147,31 @@ $ curl -u admin_test@unil.ch:test -X POST -F json=@mappingForLL.json -F xml=@map
 }
 ```
 
-3. Create a `ttl` representation to load at project ontology intialization:
+3. Create a `ttl` representation of the mapping to load at project ontology intialization:
 
-https://github.com/dhlab-basel/Knora/issues/1212
+(https://github.com/dhlab-basel/Knora/issues/1212)
 
 ```sparql
 PREFIX knora-base: <http://www.knora.org/ontology/knora-base#>
-
 Construct {
     ?mapping ?p ?o .
-
     ?mapping knora-base:hasMappingElement ?mEle .
     ?mEle ?pp ?oo .
     ?oo ?ppp ?ooo .
 }
 FROM <http://www.knora.org/data/0113/lumieres-lausanne>
 Where {
-    BIND(<http://rdfh.ch/projects/0113/mappings/LLStandoffMapping> as ?mapping)
+    BIND(<http://rdfh.ch/projects/0113/mappings/manuscript-mapping> as ?mapping)
     ?mapping ?p ?o .
 
     OPTIONAL {
         ?mapping knora-base:hasMappingElement ?mEle .
-        ?mEle ?pp ?oo .
-
-        ?oo ?ppp ?ooo .
+    	OPTIONAL {
+        	?mEle ?pp ?oo .
+    		OPTIONAL {
+        		?oo ?ppp ?ooo .
+            }
+        }
     }
 }
 ```
@@ -195,21 +202,81 @@ Archive:  LL-schema.zip
     xmlns:p0113-lumieres-lausanne="http://api.knora.org/ontology/0113/lumieres-lausanne/xml-import/v1#"
     xmlns:knoraXmlImport="http://api.knora.org/ontology/knoraXmlImport/v1#">
 
-    <Person id="person_import">
-        <knoraXmlImport:label>person_import</knoraXmlImport:label>
-        <hasBiography knoraType="richtext_value" mapping_id="http://rdfh.ch/projects/0113/mappings/LLStandoffMapping">
-            <text>
+    <User id="id_gfaucherand">
+        <knoraXmlImport:label>gfaucherand</knoraXmlImport:label>
+        <isKnoraUser knoraType="uri_value">http://rdfh.ch/users/lumieres-lausanne-gfaucherand</isKnoraUser>
+        <userHasName knoraType="richtext_value">Gilles Faucherand</userHasName>
+    </User>
+
+    <Person id="id_Mirabeau_Victor_de_Riqueti_marquis_de_1715_1789_">
+        <knoraXmlImport:label>Mirabeau, Victor de Riqueti, marquis de (1715 - 1789)</knoraXmlImport:label>
+        <hasCivilStatus knoraType="richtext_value">Fils Jean Antoine Riqueti de Mirabeau (1666-1737) et de Françoise née de Castellane (1695-1769). M. épouse en 1743 Marie Geneviève née de Vassan. M. a onze enfants, dont Honoré Gabriel.</hasCivilStatus>
+        <hasName knoraType="richtext_value">Mirabeau, Victor de Riqueti, marquis de</hasName>
+        <hasNationality knoraType="hlist_value">http://rdfh.ch/lists/0113/00d89c99ca01</hasNationality>
+        <hasOldId knoraType="richtext_value">269</hasOldId>
+        <hasPlaceBirth knoraType="richtext_value">Pertuis</hasPlaceBirth>
+        <hasPlaceDeath knoraType="richtext_value">Argenteuil</hasPlaceDeath>
+        <hasReligion knoraType="hlist_value">http://rdfh.ch/lists/0113/b921967c9e01</hasReligion>
+        <isApproximateBeginDate knoraType="boolean_value">false</isApproximateBeginDate>
+        <isApproximateEndDate knoraType="boolean_value">false</isApproximateEndDate>
+        <isModern knoraType="boolean_value">false</isModern>
+        <mayHaveBiography knoraType="boolean_value">true</mayHaveBiography>
+        <noticeIsCreated knoraType="boolean_value">true</noticeIsCreated>
+        <noticeIsValid knoraType="boolean_value">true</noticeIsValid>
+        <personHasDate knoraType="date_value">GREGORIAN:1715-10-5 CE:1789-7-13 CE</personHasDate>
+    </Person>
+
+    <Contribution id="id_mirabeau_auteur">
+        <knoraXmlImport:label>mirabeau-auteur</knoraXmlImport:label>
+        <contributionHasSequenceNumber knoraType="int_value">1</contributionHasSequenceNumber>
+        <hasContributionType knoraType="hlist_value">http://rdfh.ch/lists/0113/154349a29401</hasContributionType>
+        <isContributor>
+            <Person knoraType="link_value" target="id_Mirabeau_Victor_de_Riqueti_marquis_de_1715_1789_" linkType="ref"></Person>
+        </isContributor>
+    </Contribution>
+
+    <BibliographicNotice id="id_biblio1">
+        <knoraXmlImport:label>biblio1</knoraXmlImport:label>
+        <bibliographicNoticeHasTitle knoraType="richtext_value">Sans titre [Lettre à Marc Charles Frédéric de Sacconay, 28 octobre 1731]</bibliographicNoticeHasTitle>
+        <hasContribution>
+            <Contribution knoraType="link_value" target="id_mirabeau_auteur" linkType="ref"></Contribution>
+        </hasContribution>
+        <hasDocumentType knoraType="hlist_value">http://rdfh.ch/lists/0113/2240f647af01</hasDocumentType>
+        <hasLanguage knoraType="hlist_value">http://rdfh.ch/lists/0113/384d693b9a01</hasLanguage>
+        <hasLiteratureType knoraType="hlist_value">http://rdfh.ch/lists/0113/eddfe26c9601</hasLiteratureType>
+        <hasManuscriptType knoraType="hlist_value">http://rdfh.ch/lists/0113/2a4929fe9701</hasManuscriptType>
+        <hasOldId knoraType="richtext_value">4478</hasOldId>
+        <hasPages knoraType="richtext_value">1</hasPages>
+        <hasShortTitle knoraType="richtext_value">Lettre à Marc Charles Frédéric de Sacconay</hasShortTitle>
+        <hasSubjectKeyword knoraType="hlist_value">http://rdfh.ch/lists/0113/25f56e083701</hasSubjectKeyword>
+        <hasTranscription>
+            <Transcription knoraType="link_value" target="id_Sans_titre_Lettre_Marc_Charles_Fr_d_ric_de_Sacconay_28_octobre_1731_" linkType="ref"></Transcription>
+        </hasTranscription>
+        <hasWritingDate knoraType="date_value">GREGORIAN:1731-10-28 CE</hasWritingDate>
+        <hasWritingPlace knoraType="richtext_value">Besançon</hasWritingPlace>
+    </BibliographicNotice>
+
+    <Transcription id="id_Sans_titre_Lettre_Marc_Charles_Fr_d_ric_de_Sacconay_28_octobre_1731_">
+        <knoraXmlImport:label>Sans titre [Lettre à Marc Charles Frédéric de Sacconay, 28 octobre 1731]</knoraXmlImport:label>
+        <hasDiffusionType knoraType="boolean_value">true</hasDiffusionType>
+        <hasOldId knoraType="richtext_value">169</hasOldId>
+        <hasReleaseDate knoraType="date_value">GREGORIAN:2016-12-25 CE</hasReleaseDate>
+        <hasReviewer>
+            <User knoraType="link_value" target="id_gfaucherand" linkType="ref"></User>
+        </hasReviewer>
+        <hasScope knoraType="hlist_value">http://rdfh.ch/lists/0113/f3daeff3af01</hasScope>
+        <hasStatus knoraType="hlist_value">http://rdfh.ch/lists/0113/58a79cbaaf01</hasStatus>
+        <transcriptionHasCreator>
+            <User knoraType="link_value" target="id_gfaucherand" linkType="ref"></User>
+        </transcriptionHasCreator>
+        <transcriptionHasText knoraType="richtext_value" mapping_id="http://rdfh.ch/projects/0113/mappings/manuscript-mapping">
+            <text xmlns="">
                 <p>
                     <span class="sic" data-corr="voici l'adaptation" title="voici l'adaptation">Adaptation éditoriale</span>
                 </p>
             </text>
-        </hasBiography>
-        <hasName knoraType="richtext_value">Auteur à intégrer - via LL</hasName>
-        <isModern knoraType="boolean_value">true</isModern>
-        <mayHaveBiography knoraType="boolean_value">false</mayHaveBiography>
-        <noticeIsCreated knoraType="boolean_value">false</noticeIsCreated>
-        <noticeIsValid knoraType="boolean_value">false</noticeIsValid>
-    </Person>
+        </transcriptionHasText>
+    </Transcription>
 </knoraXmlImport:resources>
 ```
 
@@ -217,8 +284,6 @@ Archive:  LL-schema.zip
 
 ```shell
 $ curl -u admin_test@unil.ch:test -X POST -d @data.xml http://localhost:3333/v1/resources/xmlimport/http%3A%2F%2Frdfh.ch%2Fprojects%2F0113
-
-{"createdResources":[{"clientResourceID":"person_import","resourceIri":"http://rdfh.ch/0113/oLtoCaxDTNOCdNUEeM_qNA","label":"person_import"}],"status":0}
 ```
 
 ## Hack Salsah 1 to render correctly the new standoff mapping

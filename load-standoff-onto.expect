@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+
+set timeout 120
+spawn console.sh --force --echo --serverURL [lindex $argv 0]
+set prompt "> "
+expect $prompt
+send "open knora-test .\r"
+
+
+expect $prompt
+send "load ./lumieres-lausanne-standoff.ttl into http://www.knora.org/ontology/0113/lumieres-lausanne .\r"
+
+
+send "close .\r"
+expect $prompt
+send "exit .\r"
